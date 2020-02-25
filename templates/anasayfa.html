@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block appbody%}
+<br>
+<h5 class="blacktext text-center">
+    Sitemizde paylaşılan tüm yazılar burdadır. Tıklayarak içeriğini öğrenebilirsiniz.
+</h5>
+<br>
+<div class="list-group">
+    {% for makale in makaleler %}
+    <div class="list-group-item d-flex justify-content-between">
+        <a href="/profile/{{makale.id}}">
+            {{makale.title}}
+        </a>
+        <small>Yazar: {{makale.author}}</small>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
