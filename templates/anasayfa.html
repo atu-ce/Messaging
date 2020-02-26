@@ -5,15 +5,36 @@
 <h5 class="blacktext text-center">
     Sitemizde paylaşılan tüm yazılar burdadır. Tıklayarak içeriğini öğrenebilirsiniz.
 </h5>
+<h5 class="blacktext text-left">
+    Kullanıcılara tıklayarak onlar ile mesajlaşabilirsiniz.
+</h5>
 <br>
-<div class="list-group">
-    {% for makale in makaleler %}
-    <div class="list-group-item d-flex justify-content-between">
-        <a href="/profile/{{makale.id}}">
-            {{makale.title}}
-        </a>
-        <small>Yazar: {{makale.author}}</small>
-    </div>
-    {% endfor %}
-</div>
+<table align="center" class="table" border="0" width=100%>
+<tr>
+    <td width=40%>
+        <h3 class="text-center purpletext">Kullanıcılar</h3>
+        <hr>
+        <br>
+        <h5 class="text-center greytext">Siz: {{user}}</h5>
+        <br>
+        {% include 'messaging.html' %}
+    </td>
+    <td width=60%>
+        <h3 class="text-center purpletext">Paylaşılan yazılar</h3>
+        <hr>
+        <br>
+        <div class="list-group">
+            {% for makale in makaleler %}
+            <div class="list-group-item d-flex justify-content-between">
+                <a href="/profile/{{makale.id}}">
+                    {{makale.title}}
+                </a>
+                <small>Yazar: {{makale.author}}</small>
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+    </td>
+</tr>
+</table>
 {% endblock %}

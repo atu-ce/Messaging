@@ -35,4 +35,5 @@ urlpatterns = [
     path('profile/<int:id>', article_detail),
 
     path('about',about),
+
 ]

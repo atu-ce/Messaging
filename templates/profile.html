@@ -1,31 +1,21 @@
 {% extends 'index.html' %}
 
 {% block appbody%}
-<table class="table" align="center" border="0" width=100%>
+<table class="table" align="center" border="0" width=90%>
     <tr>
-        <th width=20%>
-            <h3 class="text-center purpletext">Kullanıcılar</h3>
-        </th>
         <th width=60%>
-
         </th>
         <th width=20%>
             <h3 class="text-center purpletext">Paylaştığın yazılar</h3>
         </th>
     </tr>
     <tr>
-        <td rowspan="2" width=10%>
-            <h3 class="text-left bluetext">{{user}}</h3><br>
-            {% for user in users %}
-            <h3 class="text-left bluetext">{{user.username}}</h3>
-            {% endfor %}
-        </td>
-        <td width=35%>
+        <td width=60%>
             <h5 class="blacktext text-center">
                 Lütfen önemli gördüğünüz bilgileri bizim ile paylaşın.
             </h5>
         </td>
-        <td rowspan="2" width=55%>
+        <td rowspan="2" width=30%>
             <div class="list-group">
                 {% for post in posts %}
                 <a href="/profile/{{post.id}}">
@@ -45,7 +35,7 @@
             <form method="POST" action="" class="form-group">
                 {% csrf_token %}
                 <input class="form-control my-2" type="text" name="baslik" id="" placeholder="Konu başlığı giriniz" />
-                <textarea class="form-control" name="icerik" id="" cols="30" rows="10"></textarea>
+                <textarea class="form-control" name="icerik" id="" cols="40" rows="5"></textarea>
                 <button class="btn btn-lg btn-block btn-outline-danger my-3" type="submit">Yayınla</button>
             </form>
         </td>

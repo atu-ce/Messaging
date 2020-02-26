@@ -9,24 +9,47 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-from app.models import Post, Comment
+from app.models import Post, Comment, Message
+
+#Giriş yapılmadığındaki anasayfa:
 
 def home(request):
     return render(request,"home.html")
 
+#Giriş yapıldığındaki anasayfa:
+
 @login_required(login_url="/login/") 
 def anasayfa(request):
+    users=User.objects.all().exclude(id=request.user.id)
     makaleler = Post.objects.all()
     
     context = {
-        "makaleler": makaleler
+        "makaleler": makaleler,
+        "users": users
     }
+
+    #Messaging Bölümü:
+
+    if request.method == "POST":
+        targetuser_id = request.POST.get("targetuser")
+        mymessage = request.POST.get("mymessage")
+        targetuser = User.objects.get(id=targetuser_id)
+        Message.objects.create(
+            body=mymessage,
+            sender=request.user,
+            receiver=targetuser
+        )
+        return redirect("/home/")
+    
+
     return render(request,"anasayfa.html",context)
 
 @login_required(login_url="/login/") 
 def profile(request):
     users=User.objects.all().exclude(id=request.user.id)
     posts=Post.objects.filter(author=request.user)
+
+    #Post yayınlama Bölümü:
 
     if request.method == "POST":
         icerik = request.POST.get("icerik")
@@ -40,6 +63,7 @@ def profile(request):
         "posts": posts,
         "users": users
     }
+
     return render(request,"profile.html",context)
 
 def article_detail(request, id):
@@ -47,6 +71,9 @@ def article_detail(request, id):
     context = {
         "makale": post
     }
+
+    #Yorum Bölümü:
+
     if request.method == "POST":
         gelen_yorum = request.POST.get("yorum")
 
