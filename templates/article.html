@@ -1,7 +1,51 @@
 {% extends 'index.html' %}
 {% block appbody%}
-<br>
-<h4 class="purpletext text-center">{{makale.title}}</h4>
-<hr><br>
-<h5 class="blacktext text-left">{{makale.content}}</h5>
+<table align="center" class="table" border="0" width=100%>
+    <tr>
+        <td colspan="2">
+            <h4 class="purpletext text-center">{{makale.title}}</h4>
+    <hr><br>
+    <div class="list-group">
+        <div class="list-group-item d-flex justify-content-between">
+            <h5 class="blacktext text-left">{{makale.content}}</h5>
+            <small>Yazar: {{makale.author}}</small>
+        </div>
+    </div>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <span>
+                <div class="list-group">
+                    {% for comment in makale.comment_set.all %}
+                    <div class="list-group-item d-flex justify-content-between">
+                        <h6 class="blacktext text-left">{{comment.text}}</h6>
+                        <small>Yorum sahibi: {{comment.author}}</small>
+                    </div>
+                    <br>
+                    {%endfor%}
+                </div>
+            
+            </span>
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <form action="" method="post">
+                {% csrf_token %}
+                <textarea name="yorum" id="" cols="40" rows="4"></textarea>
+                <br>
+                <button class="btn btn-lg btn-outline-danger my-3" type="submit">Yorumla</button>
+            </form>
+        </td>
+    </tr>
+    </table>
+
+
+
+
+
 {% endblock appbody%}

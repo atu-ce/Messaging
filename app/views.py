@@ -9,7 +9,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-from app.models import Post
+from app.models import Post, Comment
 
 def home(request):
     return render(request,"home.html")
@@ -47,6 +47,16 @@ def article_detail(request, id):
     context = {
         "makale": post
     }
+    if request.method == "POST":
+        gelen_yorum = request.POST.get("yorum")
+
+        Comment.objects.create(
+            text=gelen_yorum,
+            author=request.user,
+            post=post
+        )
+        url = "/profile/"+str(post.id)
+        return redirect(url)
     return render(request, "article.html", context)    
 
 def about(request):
