@@ -1,18 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
-
 # Create your views here.
-
+#internal
+from app.models import Post, Comment, Message
 
 
 User = get_user_model()
 
 
-from app.models import Post, Comment, Message
+
 
 #Giriş yapılmadığındaki anasayfa:
-
 def home(request):
     return render(request,"home.html")
 
