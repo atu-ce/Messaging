@@ -21,7 +21,7 @@ from django.contrib.auth import views as auth_views
 
 from app.views import anasayfa, home, profile, about, article_detail
 
-
+    
 
 urlpatterns = [
     path('admin/', admin.site.urls),
