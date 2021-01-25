@@ -34,6 +34,6 @@ urlpatterns = [
     path('profile/',profile),
     path('profile/<int:id>', article_detail),
 
-    path('about',about),
+    path('about/',about),
 
 ]
